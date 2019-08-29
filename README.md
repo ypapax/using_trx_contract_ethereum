@@ -1,9 +1,11 @@
-https://youtu.be/-7uChuO_VzM
+https://youtu.be/k_w6seLoem4
 
-https://gist.github.com/ezynda3/551155e9b6447224d9ff2431c1f57488
-
+# generating token.go
+```
+./commands.sh abigen
+```
 # running
 
 ```
-./commands.sh runc
+./commands.sh run
 ```
