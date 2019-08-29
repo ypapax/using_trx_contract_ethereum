@@ -1,29 +1,28 @@
 package main
 
 import (
-	"context"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"log"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/ypapax/jsn"
 )
 
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	conn, err := ethclient.Dial("https://mainnet.infura.io")
 	if err != nil {
-		log.Fatal("Whoops something went wrong!", err)
+		log.Fatalf("Failed to connect to the Ethereum network: %v", err)
 	}
 
-	ctx := context.Background()
-	tx, pending, err := conn.TransactionByHash(ctx, common.HexToHash("0x30999361906753dbf60f39b32d3c8fadeb07d2c0f1188a32ba1849daac0385a8"))
+	contract, err := NewTronToken(common.HexToAddress("0xf230b790E05390FC8295F4d3F60332c93BEd42e2"), conn)
+	if err != nil {
+		log.Fatalf("Failed to instantiate contract: %v", err)
+	}
+
+	amt, err := contract.BalanceOf(&bind.CallOpts{}, common.HexToAddress("0x387fc6939b5e54b2f11793df05388f9d11942948"))
 	if err != nil {
 		log.Fatal(err)
 	}
-	if !pending {
-		log.Println(jsn.B(tx))
-	} else {
-		log.Println("it's pending")
-	}
+	log.Println("balance amount: ", amt)
 }

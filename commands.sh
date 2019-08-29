@@ -9,7 +9,7 @@ abigen() {
   ls -la token.go
 }
 
-runc() {
+run() {
   docker-compose build
   docker-compose up
 }

@@ -1,6 +1,6 @@
 ARG GO_VERSION=1.12
 FROM golang:${GO_VERSION}
-COPY . /transaction_info
-WORKDIR /transaction_info
+COPY . /trx_contract_usage
+WORKDIR /trx_contract_usage
 RUN go install
-CMD transcation_info_etherium
+CMD trx_contract_usage
