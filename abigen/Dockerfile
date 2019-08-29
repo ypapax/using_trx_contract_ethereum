@@ -16,5 +16,6 @@ RUN chmod +x solc
 COPY TronToken.sol /root/TronToken.sol
 COPY entrypoint.sh /root/entrypoint.sh
 RUN chmod +x /root/entrypoint.sh
-WORKDIR /root
+RUN mkdir -p /root/out
+WORKDIR /root/out
 ENTRYPOINT ["/root/entrypoint.sh"]
